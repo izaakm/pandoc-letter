@@ -202,9 +202,6 @@ $if(author)$
 $endif$
 $endif$
 
-$if(date)$
-\date{$date$}
-$endif$
 
 $for(header-includes)$
 $header-includes$
@@ -242,7 +239,6 @@ $if(dir)$
 \fi
 $endif$
 
-\address{$for(return-address)$$return-address$$sep$\\$endfor$}
 
 $if(blockquote)$
 \usepackage{mdframed} % color is loaded by mdframed
@@ -261,62 +257,70 @@ $endif$
 \begin{document}
 
 $for(include-before)$
-$include-before$
-
+    $include-before$
 $endfor$
-$if(toc)$
-{
-$if(colorlinks)$
-\hypersetup{linkcolor=$if(toccolor)$$toccolor$$else$$endif$}
-$endif$
-\setcounter{tocdepth}{$toc-depth$}
-\tableofcontents
-}
+
+\address{$for(return-address)$$return-address$$sep$\\$endfor$}
+
+\begin{letter}{$for(recipient)$$recipient$$sep$\\$endfor$}
+
+% If the date is not set, it will be automatically included (bc that's how
+% latex "letter" documentclass works). If the date is set, the value of \date
+% has to be set before calling \opening.
+$if(date)$
+    \date{$date$}
 $endif$
 
+$if(opening)$
+    \opening{$opening$}
+$endif$
 
-\begin{letter}{$for(address)$$address$$sep$\\$endfor$$if(subject)$\\ ~ \\$subject$$endif$}
-\opening{$opening$}
+$if(subject)$
+    $subject$
+$endif$
 
 $body$
 
 $if(closing)$
-$if(closing-indentation)$
-\longindentation=$closing-indentation$
+    $if(closing-indentation)$
+        \longindentation=$closing-indentation$
+    $endif$
+    \closing{$closing$}
 $endif$
-\closing{$closing$}
-$endif$
+
 $if(encl)$
-\encl{$for(encl)$$encl$$sep$\\$endfor$}
+    \encl{$for(encl)$$encl$$sep$\\$endfor$}
 $endif$
+
 $if(cc)$
-\cc{$for(cc)$$cc$$sep$\\$endfor$}
+    \cc{$for(cc)$$cc$$sep$\\$endfor$}
 $endif$
+
 $if(ps)$
-\ps{$ps$}
+    \ps{$ps$}
 $endif$
 
 \end{letter}
 
 $if(natbib)$
-$if(bibliography)$
-$if(biblio-title)$
-$if(book-class)$
-\renewcommand\bibname{$biblio-title$}
-$else$
-\renewcommand\refname{$biblio-title$}
+    $if(bibliography)$
+        $if(biblio-title)$
+            $if(book-class)$
+                \renewcommand\bibname{$biblio-title$}
+            $else$
+                \renewcommand\refname{$biblio-title$}
+            $endif$
+        $endif$
+    \bibliography{$for(bibliography)$$bibliography$$sep$,$endfor$}
+    $endif$
 $endif$
-$endif$
-\bibliography{$for(bibliography)$$bibliography$$sep$,$endfor$}
 
-$endif$
-$endif$
 $if(biblatex)$
-\printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
-
+    \printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
 $endif$
+
 $for(include-after)$
 $include-after$
-
 $endfor$
+
 \end{document}
