@@ -95,26 +95,6 @@ The following can be set either as variables when executing `pandoc` or added to
 `signature-width`
 :   Specify width of signature image file.
 
-## Running with Docker
-
-This requires [Docker](https://www.docker.com/products/docker-desktop) to be installed. 
-
-After cloning the repository build the container. `cd` to the cloned directory and run 
-
-``` 
-  docker build --tag=pandoc-letter .
-```
-
-This has to be executed only once per machine.
-
-To create a letter run 
-
-```
-    docker run --volume <path_to_folder_with_letter.md>:/data pandoc-letter --template=template-letter.tex letter.md -o letter.pdf
-```
-
-Make sure you insert the full folder path where `letter.md` resides.
-
 ### Images, Attachments
 
 To insert an image into the body of your letter:
