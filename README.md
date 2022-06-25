@@ -1,4 +1,5 @@
-# A simple letter template for Pandoc
+A simple letter template for Pandoc
+===================================
 
 [![Build Status](https://travis-ci.org/aaronwolen/pandoc-letter.svg?branch=master)](https://travis-ci.org/aaronwolen/pandoc-letter)
 [![Package-License](http://img.shields.io/badge/license-GPL--3-brightgreen.svg?style=flat)](http://www.gnu.org/licenses/gpl-3.0.html)
@@ -43,7 +44,8 @@ pandoc --template=template-letter.tex example/letter.md -o example/letter.pdf
 
 You can see the PDF output [here](https://github.com/aaronwolen/pandoc-letter/blob/master/example/letter.pdf).
 
-## Features
+Features
+--------
 
 The following can be set either as variables when executing `pandoc` or added to the YAML metadata.
 
@@ -95,7 +97,8 @@ The following can be set either as variables when executing `pandoc` or added to
 `signature-width`
 :   Specify width of signature image file.
 
-### Images, Attachments
+Images, Attachments
+-------------------
 
 To insert an image into the body of your letter:
 
@@ -112,7 +115,22 @@ and then attach the two pdf files with whatever utilities you are
 familiar with.
 
 
-## License
+Installation
+------------
+
+This should work with a MacText installation.
+
+With a BasicTex installation, you will need to install some packages:
+
+```sh
+sudo tlmgr update --self
+sudo tlmgr install mdframed
+sudo tlmgr install needspace
+sudo tlmgr install zref
+```
+
+License
+-------
 
 GPL-3 for pandoc-letter and the underlying [Pandoc template][latex-template].
 
