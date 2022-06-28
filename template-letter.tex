@@ -285,6 +285,9 @@ $if(closing)$
     $if(closing-indentation)$
         \longindentation=$closing-indentation$
     $endif$
+    % Remove the white space for the handwritten signature.
+    % https://tex.stackexchange.com/a/69303/159246
+    \addtolength{\medskipamount}{-1\medskipamount}
     \closing{$closing$}
 $endif$
 
